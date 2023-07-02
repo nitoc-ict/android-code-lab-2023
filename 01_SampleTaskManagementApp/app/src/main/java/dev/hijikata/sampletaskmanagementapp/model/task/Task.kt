@@ -3,21 +3,24 @@ package dev.hijikata.sampletaskmanagementapp.model.task
 import java.time.ZonedDateTime
 
 sealed class Task {
+    abstract val id: Int
     abstract val title: String
     abstract val description: String
-    abstract val deadline: ZonedDateTime
+    abstract val deadline: ZonedDateTime?
 
     data class DraftTask(
         override val title: String,
         override val description: String,
-        override val deadline: ZonedDateTime,
-    ) : Task()
+        override val deadline: ZonedDateTime?,
+    ) : Task() {
+        override val id: Int = 0
+    }
 
     data class InProgressTask(
-        val id: Int,
+        override val id: Int,
         override val title: String,
         override val description: String,
-        override val deadline: ZonedDateTime,
+        override val deadline: ZonedDateTime?,
     ) : Task() {
         constructor(id: Int, draftTask: DraftTask) : this(
             id,
@@ -25,13 +28,19 @@ sealed class Task {
             draftTask.description,
             draftTask.deadline
         )
+        constructor(completedTask: CompletedTask) : this(
+            completedTask.id,
+            completedTask.title,
+            completedTask.description,
+            completedTask.deadline,
+        )
     }
 
     data class CompletedTask(
-        val id: Int,
+        override val id: Int,
         override val title: String,
         override val description: String,
-        override val deadline: ZonedDateTime,
+        override val deadline: ZonedDateTime?,
     ) : Task() {
         constructor(inProgressTask: InProgressTask) :this(
             inProgressTask.id,
