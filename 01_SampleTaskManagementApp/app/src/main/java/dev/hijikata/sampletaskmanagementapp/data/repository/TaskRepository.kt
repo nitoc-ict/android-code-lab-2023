@@ -11,6 +11,7 @@ interface TaskRepository {
 
     suspend fun editInProgressTask(targetTask: Task.InProgressTask, draftTask: Task.DraftTask): Task.InProgressTask
     suspend fun completeInProgressTask(task: Task.InProgressTask): Task.CompletedTask
+    suspend fun revertCompletedTask(task: Task.CompletedTask): Task.InProgressTask
 
     suspend fun deleteInProgressTask(task: Task.InProgressTask): Unit
     suspend fun deleteCompletedTask(task: Task.CompletedTask): Unit
