@@ -1,4 +1,4 @@
-package dev.hijikata.sampletaskmanagementapp.ui
+package dev.hijikata.sampletaskmanagementapp.ui.task_detail
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,25 +7,25 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import dev.hijikata.sampletaskmanagementapp.R
-import dev.hijikata.sampletaskmanagementapp.databinding.FragmentSecondBinding
+import dev.hijikata.sampletaskmanagementapp.databinding.FragmentTaskDetailBinding
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
  */
-class SecondFragment : Fragment() {
+class TaskDetailFragment : Fragment() {
 
-    private var _binding: FragmentSecondBinding? = null
+    private var _binding: FragmentTaskDetailBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
-    ): View? {
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
 
-        _binding = FragmentSecondBinding.inflate(inflater, container, false)
+        _binding = FragmentTaskDetailBinding.inflate(inflater, container, false)
         return binding.root
 
     }
