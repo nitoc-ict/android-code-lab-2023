@@ -11,18 +11,33 @@ sealed class Task {
         override val title: String,
         override val description: String,
         override val deadline: ZonedDateTime,
-    ): Task()
+    ) : Task()
+
     data class InProgressTask(
         val id: Int,
         override val title: String,
         override val description: String,
         override val deadline: ZonedDateTime,
-    ): Task()
+    ) : Task() {
+        constructor(id: Int, draftTask: DraftTask) : this(
+            id,
+            draftTask.title,
+            draftTask.description,
+            draftTask.deadline
+        )
+    }
 
     data class CompletedTask(
         val id: Int,
         override val title: String,
         override val description: String,
         override val deadline: ZonedDateTime,
-    ): Task()
+    ) : Task() {
+        constructor(inProgressTask: InProgressTask) :this(
+            inProgressTask.id,
+            inProgressTask.title,
+            inProgressTask.description,
+            inProgressTask.deadline,
+        )
+    }
 }
